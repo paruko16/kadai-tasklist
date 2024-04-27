@@ -31,7 +31,12 @@ public class UpdateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String _token = request.getParameter("_token");
         if(_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
@@ -42,9 +47,6 @@ public class UpdateServlet extends HttpServlet {
 
 
             //フォームの内容を各フィールドに上書き
-            String title = request.getParameter("title");
-            t.setTitle(title);
-
             String content = request.getParameter("content");
             t.setContent(content);
 
@@ -61,14 +63,6 @@ public class UpdateServlet extends HttpServlet {
             //indexページへリダイレクト
             response.sendRedirect(request.getContextPath() + "/index");
         }
-    }
-
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
     }
 
 }
